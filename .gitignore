@@ -29,6 +29,9 @@ bin/
 ### Mac OS ###
 .DS_Store
 
+### Compilados Java ###
+*.class
+
 ### Arquivos de dados ignorados ###
 *.csv
 *.txt
