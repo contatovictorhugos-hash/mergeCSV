@@ -3,10 +3,17 @@
 ## Resumo da Aplicacao
 O MergeCSV e um utilitario Java de linha de comando criado para mesclar multiplos arquivos CSV localizados dentro de um mesmo diretorio.
 
-Ele funciona iterando sobre todos os arquivos `.csv` do diretorio informado, processando-os sequencialmente em ordem alfabetica. O comportamento de mesclagem obedece as seguintes regras:
-- A primeira linha (cabecalho) do primeiro arquivo arquivo lido e armazenada e impressa no arquivo de saida.
-- Para os arquivos subsequentes lidos, a primeira linha e comparada com o cabecalho. Se for identica, a linha e ignorada, impedindo a repeticao indesejada de cabecalhos no meio dos dados. Caso contrario, a linha e inserida normalmente.
-- Todo o restante dos dados e anexado sequencialmente em um unico arquivo resultante chamado `merged.csv`.
+Ele funciona iterando sobre todos os arquivos `.csv` do diretorio informado, processando-os sequencialmente em ordem alfabetica. O comportamento principal obedece a duas regras fundamentais:
+- A primeira linha (cabecalho) do primeiro arquivo lido e armazenada e impressa no arquivo de saida.
+- Para os arquivos subsequentes lidos, a primeira linha e sempre comparada. Se for identica ao cabecalho original, a linha e pulada, impedindo que cabecalhos sujem as metricas de analise no meio do resultado.
+- Todo o restante dos dados utilitarios e anexado em sequencia natural num unico arquivo gerado denominado `merged.csv`.
+
+## Log Estruturado (Metricas no Terminal)
+Enquanto e executado, o sistema imprime logs visuais para acompanhamento completo das metricas. A rotina gera no proprio terminal estatisticas finais que medem exatamente o seu esforco, declarando com clareza estrutural em tempo real:
+- O andamento do processamento arquivo por arquivo (quantidade de linhas de conteudo puras vs cabecalhos).
+- O numero englobado global de arquivos lidos e verificados.
+- Contabilidade de quantos cabecalhos unicos foram descartados e preservados.
+- A quantidade final documentada do calculo global de linhas efetivamente consolidadas dentro do `merged.csv`.
 
 ## Como Rodar
 
@@ -19,13 +26,13 @@ Ele funciona iterando sobre todos os arquivos `.csv` do diretorio informado, pro
    ```bash
    javac src/MergeCSV.java
    ```
-3. Apos compilar, execute a classe gerenciando o classpath para a pasta `src`. Insira o caminho do diretorio onde os arquivos CSV se encontram como argumento final (no exemplo abaixo, o ponto `.` instrui a execucao na pasta atual):
+3. Apos compilar, execute a classe gerenciando o classpath de modo a apontar a pasta `src`. Insira o caminho do diretorio onde os arquivos CSV se encontram como argumento final (no exemplo abaixo, o ponto `.` instrui a execucao em relacao a pasta atual da linha de comando em uso):
    ```bash
    java -cp src MergeCSV .
    ```
-   *Caso voce nao passe o argumento final do diretorio, o programa perguntara o caminho dinamicamente no terminal para voce digitar.*
+   *Caso voce nao passe diretorio nenhum o programa perguntara via console de input do terminal antes de iniciar.*
 
-### Via IntelliJ IDEA
-1. Abra a pasta do projeto utilizando a IDE IntelliJ IDEA.
-2. No painel de projeto ("Project"), navegue ate o arquivo `src/MergeCSV.java`.
-3. Clique com o botao direito do mouse sobre o arquivo ou sobre o editor e selecione a opcao "Run 'MergeCSV.main()'" (ou utilize o atalho Ctrl+Shift+F10).
+### Via IntelliJ IDEA ou VS Code
+1. Abra a pasta do projeto utilizando a sua IDE preferida.
+2. Navegue ate encontrar o arquivo `src/MergeCSV.java`.
+3. Simplesmente mande "Rodar" executando o contexto pelo atalho de "Run File" do ambiente da sua IDE. O Console da sua tela atuara da mesma forma como interface.
